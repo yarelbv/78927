@@ -47,6 +47,34 @@ public class SaludosEndPoint {
             //e.setId(1);
             //respuesta.getSaludos().add(s);
         //}
+        for(Saludadores s:isaludadores){
+            System.out.print(s);
+            Saludadores e = new Saludadores();
+            e.setId(1);
+            isaludadores.findAll(s);
+        }
+        return respuesta;
+    }
+
+    @PayloadRoot(namespace = "https://t4is.uv.mx/saludos", localPart = "BorrarSaludosRequest")
+    @ResponsePayload
+    public BorrarSaludoResponse modificar(@RequestPayload BorrarSaludoRequest peticion) {
+        BorrarSaludoResponse respuesta = new BorrarSaludoResponse();
+        Saludadores e = new Saludadores();
+        e.setId(peticion.getId());
+        for(Saludadores s: isaludadores){
+            if(peticion.getId()==e.getId()){
+                isaludadores.deleteById(peticion.getId());
+                break;
+            }
+        }
+        //for(Saludos s : lista){
+        //    if(peticion.getId()==s.getId()){
+        //       lista.remove(lista.indexOf(s));
+        //        break;
+           // }
+       // }
+        respuesta.setRespuesta(true);
         return respuesta;
     }
 
@@ -58,21 +86,7 @@ public class SaludosEndPoint {
         e.setNombre(peticion.getNombre());
         e.setId(peticion.getId());
         //lista.set(peticion.getId() -1, e);
-        respuesta.setRespuesta(true);
-        return respuesta;
-    }
 
-    @PayloadRoot(namespace = "https://t4is.uv.mx/saludos", localPart = "BorrarSaludosRequest")
-    @ResponsePayload
-    public BorrarSaludoResponse modificar(@RequestPayload BorrarSaludoRequest peticion) {
-        BorrarSaludoResponse respuesta = new BorrarSaludoResponse();
-        //Saludos e = new Saludos();
-        //for(Saludos s : lista){
-        //    if(peticion.getId()==s.getId()){
-        //       lista.remove(lista.indexOf(s));
-        //        break;
-           // }
-       // }
         respuesta.setRespuesta(true);
         return respuesta;
     }
